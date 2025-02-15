@@ -1,23 +1,33 @@
 # Projeto de Análise de Dados Loja Online Internacional
 
 ## Descrição do Projeto
-O projeto é uma tarefa analítica de uma loja online internacional. Ele visa trabalhar com dados realizando uma análise com foco no resultado de um teste A/B, onde o grupo a é de controle e o grupo B é o do funil de novos pagamentos. Para a realização do teste A/B, foi utilizado alguns dados:
+Este projeto visa realizar uma análise de dados de um teste A/B aplicado em uma loja online internacional. O teste tem como objetivo avaliar o impacto de uma nova recomendação do sistema em relação à conversão dos usuários nas diversas etapas do funil de vendas. Os dados utilizados no teste são os seguintes:
 - Data de início: 07/12/2020
-- Data de quando pararam de receber novos usuários: 21/12/2020
 - Data de término: 01/01/2021
-- Público: 15% de novo usuários da região da UE
-- Número esperado de partivipantes do teste: 6000
-O propósito do teste é testar mudanças relacionadas à introdução de uma recomendação do sistema melhorado. O resultado esperado com o teste A/B é em até 14 dias após o cadastro, usuários mostram uma conversão melhor nas visualizações de página do produto, ao adicionar itens ao carrinho e compras. A cada etapa do funil terá ao menos 10% de aumento
+- Data em que pararam de receber novos usuários: 21/12/2020
+- Público-alvo: 15% de novos usuários da região da União Europeia (UE)
+- Número esperado de participantes: 6.000
+A expectativa do teste A/B é que, com a introdução da recomendação do sistema melhorada, os usuários apresentem um aumento de pelo menos 10% nas conversões em cada etapa do funil: desde a visualização das páginas de produto até a adição de itens ao carrinho e finalização da compra.
+O principal objetivo é testar a eficácia das mudanças na experiência do usuário e determinar se o novo sistema de recomendação contribui para a melhoria das métricas de conversão.
 
 ## As tarefas são:
-- Análise exploratória de dados
-- Conversão em diferentes etapas do funil
-- Responder as seguintes perguntas:
-  - O número de eventos por isuário é distribuído igualmente entre as amostras?
+- Análise exploratória de dados:
+  - Entender a estrutura dos dados e as distribuições antes de realizar o teste A/B.
+  - Verificar se existem padrões ou anomalias que possam influenciar os resultados do teste.
+- Conversão em diferentes etapas do funil:
+  - Avaliar como os usuários estão avançando nas etapas do funil: visualização de página de produto, adição ao carrinho e finalização da compra.
+  - Comparar as taxas de conversão entre o grupo A (controle) e o grupo B (teste) para verificar a eficácia das mudanças.
+- Responder às seguintes perguntas:
+  - O número de eventos por usuário é distribuído igualmente entre as amostras?
+    - Verificar se os grupos A e B têm distribuições semelhantes em relação ao número de eventos por usuário. Isso ajuda a garantir que a comparação entre os grupos seja justa.
   - Os usuários de ambas as amostras estão presentes?
+    - Confirmar se a divisão dos usuários foi feita de forma aleatória e equilibrada entre os dois grupos, para evitar qualquer viés na amostra.
   - Como o número de eventos é distribuído entre os dias?
+    - Analisar a distribuição de eventos ao longo do período do teste (de 07/12/2020 a 01/01/2021), observando se há variações significativas que possam afetar os resultados.
   - Existem qualquer particularidade nos dados que você deve considerar antes de começar o teste A/B?
-- Realizar e avaliar os resultados do teste A/B
+    - Investigar se há fatores como sazonalidade, variações de tráfego, ou outros comportamentos dos usuários que podem afetar a eficácia do teste.
+- Realizar e avaliar os resultados do teste A/B:
+  - Aplicar o teste A/B com base nos dados coletados, comparar as métricas de conversão entre os grupos e avaliar se a mudança no sistema de recomendação teve o impacto esperado nas taxas de conversão
 
 ## Dicionário de dados
 - ab_project_marketing_events_us.csv: o calendário de eventos de marketing para 2020
@@ -41,12 +51,12 @@ O propósito do teste é testar mudanças relacionadas à introdução de uma re
   - 'group': o grupo de teste ao qual o usuário pertencia
 
 ## Ferramentas e Bibliotecas utilizadas
-- Pyhton: Linguagem principal utilizada para a análise
-- Pandas: Biblioteca para manipulação e análise de dados
-- Matplotlib: Biblioteca para criação de gráficos
-- Datetime: Biblioteca para manipulação de datas e horas
-- Statsmodels.stats.proportion.ztest: realizar o teste zteste
-- Scipy.stats.mannwhitneyu: realizar o teste de Mann-Whitney U
+- Python: Linguagem principal utilizada para análise dos dados e implementação de modelos estatísticos.
+- Pandas: Biblioteca essencial para manipulação e análise de dados, sendo fundamental para realizar operações de limpeza e transformação de dados.
+- Matplotlib: Biblioteca utilizada para criação de gráficos e visualizações dos dados, ajudando a representar os resultados de forma clara e compreensível.
+- Datetime: Biblioteca para manipulação de datas e horas, fundamental para trabalhar com as séries temporais de eventos no teste A/B.
+- Statsmodels.stats.proportion.ztest: Função utilizada para realizar o teste z de proporções, comparando as taxas de conversão entre os grupos de controle e teste, para verificar se há diferença significativa entre eles.
+- Scipy.stats.mannwhitneyu: Teste de Mann-Whitney U, utilizado para comparar as distribuições entre os grupos, especialmente quando os dados não seguem uma distribuição normal, ajudando a avaliar se há diferenças significativas nas métricas de conversão entre os grupos A e B.
 
 ## Imagens
 
@@ -159,27 +169,27 @@ O propósito do teste é testar mudanças relacionadas à introdução de uma re
 <img src="https://github.com/user-attachments/assets/38d17c4d-ed9b-4a15-98e1-fed2609a8051" alt="Projeto AB"/>
 
 ## Resultados
-- Data de quando pararam de receber novos usuários não ocorreu em 21/12/2020, mas sim dia 23/12/2020
-- O público da região EU realmente teve um aumento de mais de 15% assim como nas demais regiões
-- O propósito do teste de introduzir mudanças realmente aconteceu, porém não houve um aumento de pelo menos 10% a cada nova etapa, que era o resultado esperado
-- O número de participantes no teste foi de 6311, porém vários participantes estavam nos dois grupos. E excluindo os valores duplicados, a quantidade vai para 5800, menos que o esperado
-- Existe diferença estatística entre os grupos
-- A partir de um determinado dia, o teste aparentemente não vale mais a pena
-- Foi possível analisar o comportamento dos usuários e a quantidade que perdemos durante o processo
+- Data de interrupção de novos usuários: A data de quando pararam de receber novos usuários foi 23/12/2020, e não 21/12/2020, como originalmente mencionado.
+- Público da região da UE: O público da região da União Europeia realmente teve um aumento superior a 15%, assim como ocorreu nas demais regiões, o que indica que a amostra foi representativa.
+- Propósito do teste: O teste tinha como objetivo introduzir mudanças no sistema de recomendação, e, de fato, essas mudanças foram implementadas. Contudo, os resultados não atingiram o aumento esperado de pelo menos 10% a cada etapa do funil (visualizações de página, adição ao carrinho, compras), o que sugere que a mudança não teve o impacto desejado.
+- Número de participantes: Inicialmente, foram registrados 6311 participantes, porém vários usuários estavam presentes em ambos os grupos. Após a remoção de duplicatas, o número de participantes foi reduzido para 5800, o que ficou abaixo da meta de 6000.
+- Diferença estatística: Foi constatada uma diferença estatística significativa entre os grupos A e B, indicando que as mudanças no sistema de recomendação afetaram o comportamento dos usuários de forma mensurável, mas não no nível esperado.
+- Validade do teste ao longo do tempo: Após determinado dia, os resultados sugerem que o teste já não vale mais a pena, possivelmente devido a mudanças no comportamento dos usuários ao longo do tempo ou à saturação do efeito das mudanças.
+- Análise do comportamento do usuário: Foi possível realizar uma análise detalhada sobre o comportamento dos usuários durante o teste, identificando que houve perda de usuários em diferentes etapas do funil, o que pode indicar pontos de atrito ou de frustração no processo de compra.
 
 ## Aprendizados
-- Análise de dados
-- Limpeza dos dados
-- Manipulação de tabelas
-- Análise de funil de vendas
-- Construção e análise de gráficos
-- Comparação estatística de grupos de teste
+- Análise de dados: Investigação detalhada dos dados coletados, buscando identificar padrões e tendências relevantes.
+- Limpeza dos dados: Processamento dos dados para remover ou corrigir inconsistências, como valores ausentes, duplicados e formatação inadequada.
+- Manipulação de tabelas: Alteração de estruturas de dados, incluindo transformação de colunas, renomeação, e conversão de tipos de dados para facilitar a análise.
+- Análise de funil de vendas: Estudo das diferentes etapas do funil de vendas, observando a conversão de usuários de uma etapa para outra e identificando possíveis perdas ou gargalos.
+- Construção e análise de gráficos: Criação de visualizações que ajudam a entender melhor a distribuição e os padrões nos dados, como gráficos de barras, linhas, e dispersão.
+- Comparação estatística de grupos de teste: Uso de testes estatísticos (como o teste t ou Mann-Whitney) para comparar o desempenho entre grupos de teste e controle, verificando a significância das diferenças observadas.
 
 ## Contexto real
-- Qualquer empresa que deseja entender melhor o comportamento de seus usuários
-- Empresas que desejam melhorar o desempenho
-- Empresas contratadas que realizam análises, como análises de funil, para entender as empresas que a contrataram e como e onde melhorar
-- Escolas ou instituições de ensino que desejam entender o porque seus alunos estão abandonando os estudos
+- Empresas que desejam entender melhor o comportamento de seus usuários: Organizações que buscam insights detalhados sobre as ações e preferências dos seus clientes, com o objetivo de otimizar a experiência e os resultados.
+- Empresas que desejam melhorar o desempenho: Negócios que estão focados em aumentar a eficiência, aumentar conversões ou melhorar o processo de vendas, e que precisam de dados para tomar decisões informadas.
+- Empresas contratadas que realizam análises, como análises de funil, para entender as empresas que as contrataram e como e onde melhorar: Consultorias e empresas de análise de dados que ajudam outras organizações a identificar gargalos em seus processos e estratégias, com foco em métricas de desempenho como conversões, retenção e outros KPIs.
+- Escolas ou instituições de ensino que desejam entender o porquê de seus alunos estarem abandonando os estudos: Instituições que buscam entender fatores que impactam a desistência ou evasão escolar, para implementar estratégias que aumentem a retenção de alunos.
   
 ## Como executar o Proejto
 - Clone o resporitório
